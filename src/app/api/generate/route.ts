@@ -110,6 +110,9 @@ Return ONLY the JSON array. Do not include markdown formatting.`;
     if (error.message && error.message.includes('503')) {
       return NextResponse.json({ error: 'Google Gemini AI is currently overloaded. Please wait a moment and try again.' }, { status: 503 });
     }
+    if (error.message && error.message.includes('429')) {
+      return NextResponse.json({ error: 'You have exceeded the Gemini AI free tier rate limit. Please wait about 1 minute and try again!' }, { status: 429 });
+    }
     return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 });
   }
 }
