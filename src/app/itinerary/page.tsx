@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { DynamicTimeline } from '@/components/DynamicTimeline';
 import { LiveUpdateSidebar } from '@/components/LiveUpdateSidebar';
-import { ImageCarousel } from '@/components/ImageCarousel';
 import { ItineraryDay, PivotTrigger } from '@/types/engine';
 import { Loader2, ArrowLeft, Home } from 'lucide-react';
 
@@ -127,8 +126,6 @@ function ItineraryContent() {
             {days} Days • {vibe} Vibe • {pref} Preference
           </p>
         </header>
-
-        <ImageCarousel city={city} />
 
         <DynamicTimeline itinerary={currentItinerary} />
       </div>
