@@ -134,7 +134,7 @@ export const Launchpad: React.FC = () => {
             type="submit"
             className="w-full mt-8 bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-bold text-lg py-4 rounded-xl flex justify-center items-center gap-3 hover:shadow-[0_0_20px_rgba(217,70,239,0.4)] transition-shadow"
           >
-            <Rocket className="w-5 h-5" /> Initialize Engine
+            <Rocket className="w-5 h-5" /> Explore
           </motion.button>
         </form>
       </div>
