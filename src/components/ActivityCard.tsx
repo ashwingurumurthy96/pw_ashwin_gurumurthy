@@ -64,12 +64,35 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ instance, index }) =
               : 'bg-green-500/10 text-green-400 border-green-500/20'
           }`}>
             {activity.energyCost > 5 ? <BatteryFull className="w-3 h-3" /> : <Battery className="w-3 h-3" />}
-            Energy Cost: {activity.energyCost}/10
+            Energy: {activity.energyCost}/10
           </span>
           
           <span className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium border bg-slate-800/50 text-slate-400 border-slate-700">
             {activity.category}
           </span>
+        </div>
+        
+        <div className="flex flex-wrap items-center justify-between mt-1 z-10 border-t border-slate-700/50 pt-3">
+          <div className="flex items-center gap-3">
+            <div className="flex flex-col">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Entry Cost</span>
+              <span className="text-sm font-semibold text-emerald-400">
+                {activity.priceUSD === 0 ? 'Free' : `$${activity.priceUSD.toFixed(2)}`}
+                <span className="text-xs text-slate-500 ml-1 font-normal">
+                  {activity.priceINR > 0 ? `(₹${activity.priceINR.toLocaleString('en-IN')})` : ''}
+                </span>
+              </span>
+            </div>
+            
+            <div className="w-px h-6 bg-slate-700 mx-1"></div>
+            
+            <div className="flex flex-col">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Time Required</span>
+              <span className="text-sm font-medium text-slate-300">
+                {activity.timeRequired}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>

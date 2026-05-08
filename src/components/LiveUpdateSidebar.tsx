@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { CloudRain, Car, BatteryLow, RefreshCcw } from 'lucide-react';
-import { PivotTrigger } from '@/lib/enginePivot';
+import { PivotTrigger } from '@/types/engine';
 
 interface LiveUpdateSidebarProps {
   onTriggerPivot: (trigger: PivotTrigger) => void;
