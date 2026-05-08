@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { DynamicTimeline } from '@/components/DynamicTimeline';
 import { LiveUpdateSidebar } from '@/components/LiveUpdateSidebar';
+import { ImageCarousel } from '@/components/ImageCarousel';
 import { ItineraryDay, PivotTrigger } from '@/types/engine';
 import { Loader2, ArrowLeft, Home } from 'lucide-react';
 
@@ -13,6 +14,7 @@ function ItineraryContent() {
   const city = searchParams.get('dest') || 'Tokyo';
   const days = parseInt(searchParams.get('days') || '3');
   const vibe = searchParams.get('vibe') || 'Luxury';
+  const pref = searchParams.get('pref') || 'Mixed';
 
   const [initialItinerary, setInitialItinerary] = useState<ItineraryDay[]>([]);
   const [currentItinerary, setCurrentItinerary] = useState<ItineraryDay[]>([]);
@@ -29,7 +31,7 @@ function ItineraryContent() {
         const res = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ city, days, vibe })
+          body: JSON.stringify({ city, days, vibe, pref })
         });
         const data = await res.json();
         if (data.itinerary) {
@@ -47,7 +49,7 @@ function ItineraryContent() {
       }
     };
     generateItinerary();
-  }, [city, days, vibe]);
+  }, [city, days, vibe, pref]);
 
   const handleTriggerPivot = async (trigger: PivotTrigger) => {
     setActiveTrigger(trigger);
@@ -66,6 +68,7 @@ function ItineraryContent() {
           city, 
           days, 
           vibe, 
+          pref,
           trigger, 
           currentItinerary: initialItinerary 
         })
@@ -112,8 +115,8 @@ function ItineraryContent() {
 
   return (
     <div className="flex flex-col xl:flex-row gap-8 w-full relative z-10">
-      <div className="flex-1">
-        <header className="mb-12">
+      <div className="flex-1 overflow-hidden">
+        <header className="mb-8">
           <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-6 transition-colors font-medium">
             <Home className="w-4 h-4" /> Back to Launchpad
           </Link>
@@ -121,9 +124,11 @@ function ItineraryContent() {
             Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-fuchsia-500">{city}</span> Experience
           </h1>
           <p className="text-slate-400 text-lg font-medium">
-            {days} Days • {vibe} Vibe
+            {days} Days • {vibe} Vibe • {pref} Preference
           </p>
         </header>
+
+        <ImageCarousel city={city} />
 
         <DynamicTimeline itinerary={currentItinerary} />
       </div>

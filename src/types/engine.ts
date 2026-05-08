@@ -4,11 +4,8 @@ export interface Activity {
   id: string;
   name: string;
   isOutdoor: boolean;
-  energyCost: number; // 1 to 10
   category: string;
   description: string;
-  priceUSD: number;
-  priceINR: number;
   timeRequired: string;
 }
 
@@ -31,4 +28,4 @@ export interface UserPreferences {
   vibe: Vibe;
 }
 
-export type PivotTrigger = 'Heavy Rain' | 'Traffic Gridlock' | 'Energy Low' | 'None';
+export type PivotTrigger = 'Heavy Rain' | 'Traffic Gridlock' | 'None';

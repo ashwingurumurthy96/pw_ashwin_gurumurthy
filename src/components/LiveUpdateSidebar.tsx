@@ -52,22 +52,6 @@ export const LiveUpdateSidebar: React.FC<LiveUpdateSidebarProps> = ({ onTriggerP
           </div>
         </button>
 
-        <button
-          onClick={() => onTriggerPivot('Energy Low')}
-          className={`p-4 rounded-xl flex items-center gap-3 transition-all border ${
-            activeTrigger === 'Energy Low'
-              ? 'bg-fuchsia-500/20 border-fuchsia-500 shadow-[0_0_15px_rgba(217,70,239,0.3)]'
-              : 'bg-slate-800/50 border-slate-700 hover:bg-slate-700'
-          }`}
-        >
-          <div className="bg-fuchsia-500/20 p-2 rounded-lg text-fuchsia-400">
-            <BatteryLow className="w-5 h-5" />
-          </div>
-          <div className="text-left">
-            <h4 className="font-semibold text-white">Energy Low</h4>
-            <p className="text-xs text-slate-400">Swaps to low-energy acts.</p>
-          </div>
-        </button>
       </div>
 
       <button

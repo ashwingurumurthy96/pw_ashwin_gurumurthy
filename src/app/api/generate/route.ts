@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { city, days, vibe, trigger, currentItinerary } = await request.json();
+    const { city, days, vibe, trigger, currentItinerary, pref } = await request.json();
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
@@ -30,7 +30,6 @@ Here is the current itinerary in JSON format:
 ${JSON.stringify(currentItinerary, null, 2)}
 
 If the trigger is "Heavy Rain": Swap all "isOutdoor: true" activities with indoor alternatives.
-If the trigger is "Energy Low": Swap all activities with "energyCost > 5" with low-energy alternatives (energyCost <= 4).
 If the trigger is "Traffic Gridlock": Keep the same activities but increase all "travelTimeFromPrevious" by 30 mins.
 
 Return the completely updated JSON array of ItineraryDay objects matching this exact TypeScript schema:
@@ -39,11 +38,8 @@ interface Activity {
   id: string; // unique ID
   name: string;
   isOutdoor: boolean;
-  energyCost: number; // 1 to 10
   category: string; 
   description: string; // Keep concise, max 1 sentence.
-  priceUSD: number; 
-  priceINR: number; 
   timeRequired: string;
 }
 
@@ -65,18 +61,17 @@ Return ONLY the JSON array. Do not include markdown formatting.`;
     } else {
       prompt = `You are a real-time travel and logistics expert.
 Create a detailed ${days}-day itinerary for ${city} with a "${vibe}" vibe.
+The user has specified an environment preference: "${pref}".
+Ensure your activity selection strictly adheres to this preference (e.g. if "Outdoor", only include isOutdoor: true. If "Mixed", include both).
 
 Your output must be a strictly valid JSON array of ItineraryDay objects matching this exact TypeScript schema:
 \`\`\`typescript
 interface Activity {
   id: string; // generate a unique string ID
   name: string;
-  isOutdoor: boolean;
-  energyCost: number; // 1 to 10
+  isOutdoor: boolean; // Must respect the "${pref}" preference!
   category: string; // e.g., Museum, Relaxation, Cultural, Sightseeing, Food-centric, Adventure
   description: string; // Keep very concise, max 1 sentence to optimize speed.
-  priceUSD: number; // exact cost in USD (0 for free)
-  priceINR: number; // dynamically calculate cost in INR (approx 1 USD = 95 INR)
   timeRequired: string; // e.g., "2-3 hours"
 }
 
@@ -94,7 +89,7 @@ interface ItineraryDay {
 }
 \`\`\`
 
-Return ONLY the JSON array. Do not include markdown formatting. Ensure prices are realistic for 2026.`;
+Return ONLY the JSON array. Do not include markdown formatting.`;
     }
 
     const result = await model.generateContent(prompt);
