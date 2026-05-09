@@ -23,21 +23,21 @@
 
 @layer base {
   :root {
-    --background: #0f172a; /* Slate 900 */
-    --foreground: #f8fafc; /* Slate 50 */
-    --card: #1e293b; /* Slate 800 */
-    --card-foreground: #f8fafc;
-    --primary: #3b82f6; /* Blue 500 */
+    --background: #ffffff; /* White */
+    --foreground: #1e293b; /* Slate 800 */
+    --card: #ffffff; /* White */
+    --card-foreground: #1e293b;
+    --primary: #4287f5; /* Primary Blue */
     --primary-foreground: #ffffff;
     --secondary: #d946ef; /* Fuchsia 500 */
     --secondary-foreground: #ffffff;
     --accent: #2dd4bf; /* Teal 400 */
     --accent-foreground: #022c22;
     --destructive: #ef4444;
-    --destructive-foreground: #f8fafc;
-    --border: #334155; /* Slate 700 */
-    --input: #1e293b;
-    --ring: #3b82f6;
+    --destructive-foreground: #ffffff;
+    --border: #e2e8f0; /* Slate 200 */
+    --input: #f1f5f9;
+    --ring: #4287f5;
     --radius: 0.75rem;
   }
 }
@@ -48,24 +48,24 @@
   }
   body {
     @apply bg-[color:var(--background)] text-[color:var(--foreground)] min-h-screen antialiased;
-    background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                      radial-gradient(circle at 0% 100%, rgba(217, 70, 239, 0.05) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 50% 0%, rgba(66, 135, 245, 0.05) 0%, transparent 50%),
+                      radial-gradient(circle at 0% 100%, rgba(217, 70, 239, 0.03) 0%, transparent 50%);
   }
 }
 
-/* Glassmorphism Utilities */
+/* Glassmorphism Utilities - Light Mode Variant */
 .glass-panel {
-  @apply bg-slate-800/60 backdrop-blur-md border border-slate-700/50 shadow-xl;
+  @apply bg-white/80 backdrop-blur-md border border-slate-200/60 shadow-xl;
 }
 
 .glow-blue {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 20px rgba(66, 135, 245, 0.4);
 }
 
 .glow-red {
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
 }
 
 .glow-magenta {
-  box-shadow: 0 0 20px rgba(217, 70, 239, 0.5);
+  box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
 }

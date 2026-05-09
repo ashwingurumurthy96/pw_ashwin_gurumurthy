@@ -36,11 +36,11 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ instance, index }) =
 
         <div className="flex justify-between items-start z-10">
           <div>
-            <h3 className="text-xl font-bold text-white mb-1">{activity.name}</h3>
-            <p className="text-sm text-slate-400 max-w-sm">{activity.description}</p>
+            <h3 className="text-xl font-bold text-slate-900 mb-1">{activity.name}</h3>
+            <p className="text-sm text-slate-600 max-w-sm">{activity.description}</p>
           </div>
           <div className="flex flex-col items-end gap-1 shrink-0 ml-4">
-            <span className="text-xs font-semibold px-2 py-1 bg-slate-800 rounded text-slate-300 flex items-center gap-1 border border-slate-700">
+            <span className="text-xs font-semibold px-2 py-1 bg-slate-100 rounded text-slate-700 flex items-center gap-1 border border-slate-300">
               <Clock className="w-3 h-3" /> {timeSlot}
             </span>
           </div>
@@ -57,16 +57,16 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ instance, index }) =
             {activity.isOutdoor ? 'Outdoor' : 'Indoor'}
           </span>
           
-          <span className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium border bg-slate-800/50 text-slate-400 border-slate-700">
+          <span className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium border bg-slate-100 text-slate-600 border-slate-300">
             {activity.category}
           </span>
         </div>
         
-        <div className="flex flex-wrap items-center justify-between mt-1 z-10 border-t border-slate-700/50 pt-3">
+        <div className="flex flex-wrap items-center justify-between mt-1 z-10 border-t border-slate-300 pt-3">
           <div className="flex items-center gap-3">
             <div className="flex flex-col">
               <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold">Time Required</span>
-              <span className="text-sm font-medium text-slate-300">
+              <span className="text-sm font-medium text-slate-700">
                 {activity.timeRequired}
               </span>
             </div>
